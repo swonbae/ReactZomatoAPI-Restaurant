@@ -1,57 +1,53 @@
-// import React from "react";
-import React, { Component } from "react";
+import React from "react";
 
-class Pagination extends Component {
-  state = {
-    postsPerPage: this.props.postsPerPage,
-    totalPosts: this.props.totalPosts
-  };
+const Pagination = props => {
+  const pageLinks = [];
 
-  render() {
-    const pageNumbers = [];
+  for (let i = 1; i <= props.pages + 1; i++) {
+    let active = props.currentPage === i ? "active" : "";
 
-    for (let i = 1; i <= Math.ceil(this.totalPosts / this.postsPerPage); i++) {
-      console.log(i);
-      pageNumbers.push(i);
-    }
-
-    return (
-      <nav>
-        <ul className="pagination">
-          {pageNumbers.map(number => (
-            <li key={number} classNumber="page-item">
-              <a href="!#" className="page-link">
-                {number}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    pageLinks.push(
+      <li
+        className={`waves-effect ${active}`}
+        key={i}
+        onClick={() => props.nextPage(i)}
+      >
+        <a href="#">{i}</a>
+      </li>
     );
   }
-}
 
-// const Pagination = ({ postsPerPage, totalPosts }) => {
-//   const pageNumbers = [];
+  return (
+    <div className="container">
+      <div className="row">
+        <ul className="pagination">
+          {props.currentPage > 1 ? (
+            <li
+              className={`waves-effect`}
+              onClick={() => props.nextPage(props.currentPage - 1)}
+            >
+              <a href="#">Prev</a>
+            </li>
+          ) : (
+            ""
+          )}
 
-//   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-//     console.log(i);
-//     pageNumbers.push(i);
-//   }
+          {pageLinks}
 
-//   return (
-//     <nav>
-//       <ul className="pagination">
-//         {pageNumbers.map(number => (
-//           <li key={number} classNumber="page-item">
-//             <a href="!#" className="page-link">
-//               {number}
-//             </a>
-//           </li>
-//         ))}
-//       </ul>
-//     </nav>
-//   );
-// };
+          {props.currentPage < props.pages + 1 ? (
+            <li
+              className={`waves-effect`}
+              onClick={() => props.nextPage(props.currentPage + 1)}
+            >
+              <a href="#">Next</a>
+            </li>
+          ) : (
+            ""
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export default Pagination;
