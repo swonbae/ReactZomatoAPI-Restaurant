@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+// import React, { useState, useEffect } from "react";
+import Pagination from "./components/Pagination";
+
 // import Pagination from "react-js-pagination";
 // import styles from './App.module.css';
 // import Pagination from "react-bootstrap/Pagination";
@@ -19,7 +22,8 @@ class App extends Component {
     };
 
     this.title = "< Toronto Cafe List - TOP100 >";
-    // this.itemsPerPage = 20;
+
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   /*
@@ -84,10 +88,11 @@ class App extends Component {
       });
   }
 
-  // handlePageChange(pageNumber) {
-  //   // console.log(`active page is ${pageNumber}`);
-  //   this.setState({ currentPage: pageNumber });
-  // }
+  handlePageChange(page) {
+    this.setState({
+      currentPage: page
+    });
+  }
 
   render() {
     var { isLoaded, restaurants } = this.state;
@@ -115,6 +120,12 @@ class App extends Component {
               </li>
             ))}
           </ul>
+
+          <Pagination
+            postsPerPage={this.itemsPerPage}
+            totalPosts={Math.min(this.totalResultsFound, 100)}
+            onChangePage={this.handlePageChange}
+          />
         </div>
 
         // <div>
