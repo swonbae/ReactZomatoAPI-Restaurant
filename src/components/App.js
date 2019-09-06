@@ -18,21 +18,16 @@ class App extends Component {
       errorText: ""
     };
 
-    this.handlePageChange = this.handlePageChange.bind(this);
+    this.apiKey = process.env.REACT_APP_ZOMATO_ACCESS_TOKEN;
 
     this.title = "< Toronto Cafe List - TOP20 >";
-    this.apiKey = process.env.REACT_APP_ZOMATO_ACCESS_TOKEN;
-    this.itemsPerPage = 5; // fixed number of items per page
+    this.itemsPerPage = 5; // items per page in the list
   }
 
   /*
-   *   API Call to get restaurants (Cafe list of toronto)
+   *   API Call to get restaurants (Cafe list in Toronto)
    */
   fetchRestaurants = () => {
-    // var offset = (this.state.currentPage - 1) * this.state.itemsPerPage;
-    // console.log(
-    //   this.state.currentPage + " " + this.state.itemsPerPage + " " + offset
-    // );
     const offset = 0;
 
     const Url =
@@ -43,7 +38,7 @@ class App extends Component {
       "Content-Type": "application/json",
       "user-key": this.apiKey
     });
-    // console.log(Url);
+
     return fetch(Url, { headers }).then(res => {
       if (!res.ok) {
         return Promise.reject({
@@ -57,27 +52,8 @@ class App extends Component {
   };
 
   /*
-   *   API Call to get a restaurant Detail
+   *    fetched data into state variables
    */
-  // fetchRestaurantDetail = id => {
-  //   const Url =
-  //     "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + id;
-  //   const headers = new Headers({
-  //     "Content-Type": "application/json",
-  //     "user-key": this.apiKey
-  //   });
-  //   return fetch(Url, { headers }).then(res => {
-  //     if (!res.ok) {
-  //       return Promise.reject({
-  //         status: res.status,
-  //         statusText: res.statusText
-  //       });
-  //     } else {
-  //       return res.json();
-  //     }
-  //   });
-  // };
-
   getList() {
     this.setState({ isLoaded: false });
 
@@ -119,44 +95,22 @@ class App extends Component {
       });
   }
 
-  // getDetail(id) {
-  //   this.setState({ isLoaded: false });
-
-  //   this.fetchRestaurantDetail(id)
-  //     .then(data => {
-  //       this.setState(() => ({
-  //         isLoaded: true
-  //       }));
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         restaurants: error,
-  //         error: true,
-  //         errorText: "Unable to retrieve restaurants"
-  //       });
-  //       console.log(error);
-  //     });
-  // }
-
   componentDidMount() {
     this.getList();
   }
 
-  handlePageChange = pageNumber => {
-    this.setState({
-      currentPage: pageNumber
-    });
-  };
-
+  /*
+   *   Pagination
+   */
   nextPage = pageNumber => {
-    // BUG! NEED TO FIX
     this.setState({
       currentPage: pageNumber
     });
-
-    // this.getList();
   };
 
+  /*
+   *   Restaurant Details
+   */
   viewRestaurant = id => {
     const newCurrentRestaurant = this.state.restaurants.find(
       r => r.res_id == id
@@ -170,7 +124,6 @@ class App extends Component {
 
   render() {
     if (!this.state.isLoaded) {
-      // return <div>Loading...</div>;
       return (
         <div className="container">
           <div className="col s6 offset-s3">
@@ -181,9 +134,6 @@ class App extends Component {
         </div>
       );
     } else {
-      // const numberPages = Math.floor(
-      //   Math.min(this.state.totalResultsFound, 100) / this.state.itemsPerPage
-      // );
       const numberPages = Math.floor(
         this.state.totalItemsFetched / this.itemsPerPage
       );
@@ -200,8 +150,6 @@ class App extends Component {
                 offset + this.itemsPerPage
               )}
               viewRestaurant={this.viewRestaurant}
-              // currentPage={this.state.currentPage}
-              // itemsPerPage={this.itemsPerPage}
             />
           ) : (
             <RestaurantDetail

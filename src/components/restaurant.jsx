@@ -11,7 +11,6 @@ const Restaurant = props => {
                 "https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg"
               }
               alt="card image"
-              // style={{ width: "100%", height: 360 }}
             />
           ) : (
             <img src={props.image} alt="card image" />
