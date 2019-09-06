@@ -2,8 +2,8 @@ import React from "react";
 
 const Restaurant = props => {
   return (
-    <div className="col s12 m6 l3">
-      <div className="card">
+    <div className="col s12 m8 offset-m2">
+      <div className="card horizontal">
         <div className="card-image waves-effect waves-block waves-light">
           {props.image == null ? (
             <img
@@ -18,14 +18,9 @@ const Restaurant = props => {
           )}
         </div>
         <div className="card-content">
-          <p>
-            <a
-              href="#"
-              onClick={() => props.viewRestaurant(props.restaurantId)}
-            >
-              {props.name}
-            </a>
-          </p>
+          <a href="#" onClick={() => props.viewRestaurant(props.restaurantId)}>
+            <span className="card-title">{props.name}</span>
+          </a>
         </div>
       </div>
     </div>

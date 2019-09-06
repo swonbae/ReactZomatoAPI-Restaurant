@@ -11,28 +11,29 @@ class App extends Component {
       isLoaded: false,
       restaurants: [],
       currentPage: 1,
-      itemsPerPage: 0,
+      totalItemsFetched: 0,
       totalResultsFound: 0,
       currentRestaurant: null,
       error: false,
       errorText: ""
     };
 
-    this.title = "< Toronto Cafe List - TOP100 >";
-
     this.handlePageChange = this.handlePageChange.bind(this);
 
+    this.title = "< Toronto Cafe List - TOP100 >";
     this.apiKey = process.env.REACT_APP_ZOMATO_ACCESS_TOKEN;
+    this.itemsPerPage = 5; // fixed number of items per page
   }
 
   /*
    *   API Call to get restaurants (Cafe list of toronto)
    */
   fetchRestaurants = () => {
-    var offset = (this.state.currentPage - 1) * this.state.itemsPerPage;
-    console.log(
-      this.state.currentPage + " " + this.state.itemsPerPage + " " + offset
-    );
+    // var offset = (this.state.currentPage - 1) * this.state.itemsPerPage;
+    // console.log(
+    //   this.state.currentPage + " " + this.state.itemsPerPage + " " + offset
+    // );
+    const offset = 0;
 
     const Url =
       "https://developers.zomato.com/api/v2.1/search?entity_id=89&entity_type=city&start=" +
@@ -42,7 +43,7 @@ class App extends Component {
       "Content-Type": "application/json",
       "user-key": this.apiKey
     });
-    console.log(Url);
+    // console.log(Url);
     return fetch(Url, { headers }).then(res => {
       if (!res.ok) {
         return Promise.reject({
@@ -84,7 +85,7 @@ class App extends Component {
       .then(data => {
         this.setState(() => ({
           isLoaded: true,
-          itemsPerPage: data.results_shown,
+          totalItemsFetched: data.results_shown,
           totalResultsFound: data.results_found,
           restaurants: data.restaurants.map(info => {
             return {
@@ -151,7 +152,7 @@ class App extends Component {
       currentPage: pageNumber
     });
 
-    this.getList();
+    // this.getList();
   };
 
   viewRestaurant = id => {
@@ -169,17 +170,27 @@ class App extends Component {
     if (!this.state.isLoaded) {
       return <div>Loading...</div>;
     } else {
+      // const numberPages = Math.floor(
+      //   Math.min(this.state.totalResultsFound, 100) / this.state.itemsPerPage
+      // );
       const numberPages = Math.floor(
-        Math.min(this.state.totalResultsFound, 100) / this.state.itemsPerPage
+        this.state.totalItemsFetched / this.itemsPerPage
       );
+
+      const offset = (this.state.currentPage - 1) * this.itemsPerPage;
 
       return (
         <div className="App">
           <Nav />
           {this.state.currentRestaurant == null ? (
             <RestaurantList
-              restaurants={this.state.restaurants}
+              restaurants={this.state.restaurants.slice(
+                offset,
+                offset + this.itemsPerPage
+              )}
               viewRestaurant={this.viewRestaurant}
+              // currentPage={this.state.currentPage}
+              // itemsPerPage={this.itemsPerPage}
             />
           ) : (
             <RestaurantDetail
@@ -188,7 +199,7 @@ class App extends Component {
             />
           )}
 
-          {this.state.totalResultsFound > this.state.itemsPerPage &&
+          {this.state.totalItemsFetched > this.itemsPerPage &&
           this.state.currentRestaurant == null ? (
             <Pagination
               pages={numberPages}

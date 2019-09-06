@@ -4,8 +4,8 @@ const Nav = () => {
   return (
     <nav>
       <div className="nav-wrapper container">
-        <a href="" className="brand-logo">
-          Toronto Cafe List - TOP100
+        <a href="" className="brand-logo center">
+          <span>Toronto Cafe List - TOP100</span>
         </a>
       </div>
     </nav>

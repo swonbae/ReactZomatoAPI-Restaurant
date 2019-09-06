@@ -3,7 +3,7 @@ import React from "react";
 const Pagination = props => {
   const pageLinks = [];
 
-  for (let i = 1; i <= props.pages + 1; i++) {
+  for (let i = 1; i <= props.pages; i++) {
     let active = props.currentPage === i ? "active" : "";
 
     pageLinks.push(
@@ -20,7 +20,7 @@ const Pagination = props => {
   return (
     <div className="container">
       <div className="row">
-        <ul className="pagination">
+        <ul className="pagination center">
           {props.currentPage > 1 ? (
             <li
               className={`waves-effect`}
@@ -34,7 +34,7 @@ const Pagination = props => {
 
           {pageLinks}
 
-          {props.currentPage < props.pages + 1 ? (
+          {props.currentPage < props.pages ? (
             <li
               className={`waves-effect`}
               onClick={() => props.nextPage(props.currentPage + 1)}
