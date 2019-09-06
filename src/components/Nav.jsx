@@ -1,11 +1,11 @@
 import React from "react";
 
-const Nav = () => {
+const Nav = props => {
   return (
     <nav>
       <div className="nav-wrapper container">
         <a href="" className="brand-logo center">
-          <span>Toronto Cafe List - TOP100</span>
+          <span>{props.title}</span>
         </a>
       </div>
     </nav>

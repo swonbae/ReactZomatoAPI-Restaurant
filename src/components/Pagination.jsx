@@ -17,6 +17,9 @@ const Pagination = props => {
     );
   }
 
+  // let activeLeft = props.currentPage > 1 ? "waves-effect" : "disabled";
+  // let activeRight = props.currentPage < props.pages ? "waves-effect" : "disabled";
+
   return (
     <div className="container">
       <div className="row">
@@ -26,11 +29,21 @@ const Pagination = props => {
               className={`waves-effect`}
               onClick={() => props.nextPage(props.currentPage - 1)}
             >
-              <a href="#">Prev</a>
+              <a href="#">
+                <i className="material-icons">chevron_left</i>
+              </a>
             </li>
           ) : (
             ""
           )}
+          {/* <li
+            className={`${activeLeft}`}
+            onClick={() => props.nextPage(props.currentPage - 1)}
+          >
+            <a href="#">
+              <i className="material-icons">chevron_left</i>
+            </a>
+          </li> */}
 
           {pageLinks}
 
@@ -39,7 +52,9 @@ const Pagination = props => {
               className={`waves-effect`}
               onClick={() => props.nextPage(props.currentPage + 1)}
             >
-              <a href="#">Next</a>
+              <a href="#">
+                <i className="material-icons">chevron_right</i>
+              </a>
             </li>
           ) : (
             ""

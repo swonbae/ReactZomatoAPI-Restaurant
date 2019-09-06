@@ -20,7 +20,7 @@ class App extends Component {
 
     this.handlePageChange = this.handlePageChange.bind(this);
 
-    this.title = "< Toronto Cafe List - TOP100 >";
+    this.title = "< Toronto Cafe List - TOP20 >";
     this.apiKey = process.env.REACT_APP_ZOMATO_ACCESS_TOKEN;
     this.itemsPerPage = 5; // fixed number of items per page
   }
@@ -89,9 +89,11 @@ class App extends Component {
           totalResultsFound: data.results_found,
           restaurants: data.restaurants.map(info => {
             return {
-              res_id: info.restaurant.R.res_id,
+              res_id: info.restaurant.id,
+              url: info.restaurant.url,
               name: info.restaurant.name,
               address: info.restaurant.location.address,
+              locality: info.restaurant.location.locality,
               phone_numbers: info.restaurant.phone_numbers,
               thumb: info.restaurant.thumb,
               featured_image: info.restaurant.featured_image,
@@ -102,7 +104,7 @@ class App extends Component {
               timings: info.restaurant.timings,
               user_rating: info.restaurant.user_rating.aggregate_rating,
               votes: info.restaurant.user_rating.votes,
-              reviews: info.restaurant.user_rating.reviews
+              reviews: info.restaurant.all_reviews.reviews
             };
           })
         }));
@@ -168,7 +170,16 @@ class App extends Component {
 
   render() {
     if (!this.state.isLoaded) {
-      return <div>Loading...</div>;
+      // return <div>Loading...</div>;
+      return (
+        <div className="container">
+          <div className="col s6 offset-s3">
+            <div className="progress">
+              <div className="indeterminate"></div>
+            </div>
+          </div>
+        </div>
+      );
     } else {
       // const numberPages = Math.floor(
       //   Math.min(this.state.totalResultsFound, 100) / this.state.itemsPerPage
@@ -181,7 +192,7 @@ class App extends Component {
 
       return (
         <div className="App">
-          <Nav />
+          <Nav title={this.title} />
           {this.state.currentRestaurant == null ? (
             <RestaurantList
               restaurants={this.state.restaurants.slice(
@@ -194,7 +205,7 @@ class App extends Component {
             />
           ) : (
             <RestaurantDetail
-              currentRestaurant={this.state.currentRestaurant}
+              restaurant={this.state.currentRestaurant}
               closeRestaurant={this.closeRestaurant}
             />
           )}

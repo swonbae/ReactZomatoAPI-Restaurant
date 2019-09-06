@@ -19,7 +19,11 @@ const Restaurant = props => {
         </div>
         <div className="card-content">
           <a href="#" onClick={() => props.viewRestaurant(props.restaurantId)}>
+            <i className="fa fa-star">{props.userRating}</i>
+
             <span className="card-title">{props.name}</span>
+            <p className="black-text">{props.cuisines}</p>
+            <p className="black-text">{props.locality}</p>
           </a>
         </div>
       </div>
