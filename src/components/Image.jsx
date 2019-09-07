@@ -8,8 +8,10 @@ const Image = image => (
       alt={image.alt}
       height={image.height}
       width={image.width}
-      src={image.src} // use normal <img> attributes as props
-      effect="opacity"
+      src={image.src}
+      effect="black-and-white"
+      //   effect="blur"
+      placeholderSrc="https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg"
     />
     <span>{image.caption}</span>
   </div>

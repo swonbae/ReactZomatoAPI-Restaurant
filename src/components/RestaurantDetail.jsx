@@ -1,20 +1,27 @@
 import React from "react";
 import Review from "./Review";
-import Image from "./Image";
+// import Image from "./Image";
+import ModalImage from "react-modal-image";
 
 const RestaurantDetail = props => {
+  let modalIsOpen = true;
+
   return (
     <div className="container">
       <div
         className="row"
         onClick={props.closeRestaurant}
-        style={{ cursor: "pointer", paddingTop: 50, textAlign: "right" }}
+        style={{
+          cursor: "pointer",
+          paddingTop: 30,
+          textAlign: "right"
+        }}
       >
-        <i className="fa fa-arrow-left"></i>
-        <span>Go back</span>
+        <i class="fa fa-arrow-left" style={{ fontSize: 20 }} />
+        <span> Go back</span>
       </div>
       <div className="row">
-        <div className="col s12 m6">
+        <div className="col s12 m6 center">
           {props.restaurant.featured_image == null ? (
             <img
               src={
@@ -38,7 +45,8 @@ const RestaurantDetail = props => {
             </div>
             <div className="col s4 right-align">
               <h5>
-                <i className="fa fa-star">{props.restaurant.user_rating}</i>
+                <i className="fa fa-star" />
+                {props.restaurant.user_rating}
               </h5>
               <p>({props.restaurant.votes} votes)</p>
             </div>
@@ -70,14 +78,21 @@ const RestaurantDetail = props => {
       </div>
 
       <div className="row">
-        <div className="col s5 m2">
-          {props.restaurant.photos.map(p => {
-            return <Image src={p.photo.thumb_url} alt="photos" />;
-          })}
-        </div>
         <div className="col s7 m10">
           {props.restaurant.reviews.map(rv => {
             return <Review review={rv.review} />;
+          })}
+        </div>
+        <div className="col s5 m2">
+          {props.restaurant.photos.map(p => {
+            // return <Image src={p.photo.thumb_url} alt="photos" />;
+            return (
+              <ModalImage
+                small={p.photo.thumb_url}
+                large={p.photo.url}
+                alt="photo image"
+              />
+            );
           })}
         </div>
       </div>

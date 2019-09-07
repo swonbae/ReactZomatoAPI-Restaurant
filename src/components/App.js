@@ -79,6 +79,7 @@ class App extends Component {
               average_cost_for_two: info.restaurant.average_cost_for_two,
               timings: info.restaurant.timings,
               user_rating: info.restaurant.user_rating.aggregate_rating,
+              rating_color: info.restaurant.user_rating.rating_color,
               votes: info.restaurant.user_rating.votes,
               reviews: info.restaurant.all_reviews.reviews
             };
@@ -124,6 +125,7 @@ class App extends Component {
 
   render() {
     if (!this.state.isLoaded) {
+      // Loading...
       return (
         <div className="container">
           <div className="col s6 offset-s3">

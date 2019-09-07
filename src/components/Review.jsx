@@ -17,17 +17,15 @@ const Review = props => {
             <h6>{props.review.user.name}</h6>
           </div>
           <div className="col s10">
-            <p>
-              <ShowMoreText
-                lines={5}
-                more="Show more"
-                less="Show less"
-                anchorClass=""
-                expanded={false}
-              >
-                {props.review.review_text}
-              </ShowMoreText>
-            </p>
+            <ShowMoreText
+              lines={5}
+              more="Show more"
+              less="Show less"
+              anchorClass=""
+              expanded={false}
+            >
+              {props.review.review_text}
+            </ShowMoreText>
           </div>
         </div>
       </div>
