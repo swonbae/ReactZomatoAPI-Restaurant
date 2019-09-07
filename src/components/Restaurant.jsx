@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "./Image";
 
 const Restaurant = props => {
   return (
@@ -13,17 +14,25 @@ const Restaurant = props => {
               alt="card image"
             />
           ) : (
-            <img src={props.image} alt="card image" />
+            <Image src={props.image} alt="card image" />
           )}
         </div>
-        <div className="card-content">
-          <a href="#" onClick={() => props.viewRestaurant(props.restaurantId)}>
-            <i className="fa fa-star">{props.userRating}</i>
-
-            <span className="card-title">{props.name}</span>
-            <p className="black-text">{props.cuisines}</p>
-            <p className="black-text">{props.locality}</p>
-          </a>
+        <div class="card-stacked">
+          <div className="card-content">
+            <a
+              href="#"
+              onClick={() => props.viewRestaurant(props.restaurantId)}
+            >
+              <div>
+                <span className="right">
+                  <i className="fa fa-star">{props.userRating}</i>
+                </span>
+                <span className="card-title">{props.name}</span>
+              </div>
+              <p className="black-text">{props.cuisines}</p>
+              <p className="black-text">{props.locality}</p>
+            </a>
+          </div>
         </div>
       </div>
     </div>

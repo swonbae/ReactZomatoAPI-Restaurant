@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Nav from "./Nav";
 import RestaurantList from "./RestaurantList";
-import Pagination from "./Pagination";
 import RestaurantDetail from "./RestaurantDetail";
+import Pagination from "./Pagination";
 
 class App extends Component {
   constructor(props) {

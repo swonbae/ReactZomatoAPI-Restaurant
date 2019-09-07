@@ -1,5 +1,6 @@
 import React from "react";
 import Review from "./Review";
+import Image from "./Image";
 
 const RestaurantDetail = props => {
   return (
@@ -71,7 +72,7 @@ const RestaurantDetail = props => {
       <div className="row">
         <div className="col s5 m2">
           {props.restaurant.photos.map(p => {
-            return <img src={p.photo.thumb_url} alt="photos" />;
+            return <Image src={p.photo.thumb_url} alt="photos" />;
           })}
         </div>
         <div className="col s7 m10">
