@@ -1,3 +1,9 @@
+# Need to load Zomato Access Key from Environment File (.env)
+
+Create '.env' file located at the root directory, and the content should be 'REACT_APP_ZOMATO_ACCESS_TOKEN=[YOUR_ACCESS_TOKEN]' in it.
+
+----- below are auto-created document -----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
