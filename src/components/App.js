@@ -20,7 +20,7 @@ class App extends Component {
 
     this.apiKey = process.env.REACT_APP_ZOMATO_ACCESS_TOKEN;
 
-    this.title = "< Toronto Cafe List - TOP20 >";
+    this.title = "Toronto Cafe List - TOP20";
     this.itemsPerPage = 5; // items per page in the list
   }
 

@@ -9,7 +9,7 @@ const Image = image => (
       height={image.height}
       width={image.width}
       src={image.src} // use normal <img> attributes as props
-      effect="black-and-white"
+      effect="opacity"
     />
     <span>{image.caption}</span>
   </div>
