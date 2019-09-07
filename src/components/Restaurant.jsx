@@ -18,7 +18,7 @@ const Restaurant = props => {
               <Image src={props.image} alt="card image" />
             )}
           </div>
-          <div class="card-stacked">
+          <div className="card-stacked">
             <div className="card-content">
               <div>
                 <span className="right">

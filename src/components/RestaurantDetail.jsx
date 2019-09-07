@@ -4,7 +4,7 @@ import Review from "./Review";
 import ModalImage from "react-modal-image";
 
 const RestaurantDetail = props => {
-  let modalIsOpen = true;
+  // let modalIsOpen = true;
 
   return (
     <div className="container">
@@ -17,7 +17,7 @@ const RestaurantDetail = props => {
           textAlign: "right"
         }}
       >
-        <i class="fa fa-arrow-left" style={{ fontSize: 20 }} />
+        <i className="fa fa-arrow-left" style={{ fontSize: 20 }} />
         <span> Go back</span>
       </div>
       <div className="row">

@@ -11,7 +11,7 @@ const Review = props => {
               <img
                 src={props.review.user.profile_image}
                 alt="profile image"
-                class="circle responsive-img"
+                className="circle responsive-img"
               />
             </div>
             <h6>{props.review.user.name}</h6>

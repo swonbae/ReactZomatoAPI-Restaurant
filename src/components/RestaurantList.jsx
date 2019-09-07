@@ -9,6 +9,7 @@ const RestaurantList = props => {
           {props.restaurants.map((r, i) => {
             return (
               <Restaurant
+                key={i}
                 name={r.name}
                 userRating={r.user_rating}
                 locality={r.locality}
